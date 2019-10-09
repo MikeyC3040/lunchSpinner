@@ -1,0 +1,58 @@
+body {
+    background-color: #424242;
+}
+
+.main {
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+    letter-spacing: 0.15em
+}
+
+.content {
+    margin: auto;
+    width: 500px;
+    padding: 10px;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: #dbdbdb;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+.canvas {
+    width: 500px;
+    height: 500px;
+}
+
+/*@media screen and (max-width: 800px) {
+    .content{
+      width: 100%;
+    }
+
+    .canvas {
+        width: 100%;
+    }
+
+    .canvas:after {
+        content: "";
+        display: block;
+        padding-bottom: 100%;
+      }
+}*/
