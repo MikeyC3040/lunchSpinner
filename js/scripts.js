@@ -1,4 +1,4 @@
-var options = ["Rangoli","Sala Thai","Detroit Burger Bar","Mediterranean","Carnival Market","Freshii","Pho Street"];
+var options = ["Rangoli","Sala Thai","69/420","Sketch Tacos","Carnival","BBQ","Burgers","Pho Street","Kimchi"];
 
 var startAngle = 0;
 var arc = Math.PI / (options.length / 2);
@@ -8,7 +8,10 @@ var spinArcStart = 10;
 var spinTime = 0;
 var spinTimeTotal = 0;
 
-var ctx;
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+canvas.width = 500;
+canvas.height = 500;
 
 document.getElementById("spin").addEventListener("click", spin);
 document.body.onkeyup = function(e){
@@ -32,50 +35,31 @@ function getColor(item, maxitem) {
   var width = 127;
   var frequency = Math.PI*2/maxitem;
   
-  red   = Math.sin(frequency*item+2+phase) * width + center;
+  red   = 0;//Math.sin(frequency*item+2+phase) * width + center;
   green = Math.sin(frequency*item+0+phase) * width + center;
-  blue  = Math.sin(frequency*item+4+phase) * width + center;
+  blue  = 80;//Math.sin(frequency*item+4+phase) * width + center;
   
   return RGB2Color(red,green,blue);
 }
 
 
-function resize(canvas) {
-    // Lookup the size the browser is displaying the canvas.
-    var displayWidth  = canvas.clientWidth;
-    var displayHeight = canvas.clientHeight;
-   
-    // Check if the canvas is not the same size.
-    if (canvas.width  != displayWidth ||
-        canvas.height != displayHeight) {
-   
-      // Make the canvas the same size
-      canvas.width  = displayWidth;
-      canvas.height = displayHeight;
-    }
-  }
-
 function drawRouletteWheel() {
-  var canvas = document.getElementById("canvas");
-  resize(canvas);
   if (canvas.getContext) {
     var outsideRadius = 220;
     var textRadius = 175;
     var insideRadius = 145;
 
-    ctx = canvas.getContext("2d");
     ctx.clearRect(0,0,500,500);
 
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 2;
-
-    ctx.font = 'bold 16px Impact, Arial';
+    ctx.font = 'bold 20px Kanit, Sans Serif';
 
     for(var i = 0; i < options.length; i++) {
       var angle = startAngle + i * arc;
       //ctx.fillStyle = colors[i];
       ctx.fillStyle = getColor(i, options.length);
 
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "black";
       ctx.beginPath();
       ctx.arc(250, 250, outsideRadius, angle, angle + arc, false);
       ctx.arc(250, 250, insideRadius, angle + arc, angle, true);
@@ -83,16 +67,14 @@ function drawRouletteWheel() {
       ctx.fill();
 
       ctx.save();
-      ctx.shadowOffsetX = -1;
-      ctx.shadowOffsetY = -1;
-      ctx.shadowBlur    = 5;
-      ctx.shadowColor = "#d1d1d1";
-      ctx.fillStyle = "#383838";
+      ctx.fillStyle = "white";
+      ctx.lineWidth = 1;
       ctx.translate(250 + Math.cos(angle + arc / 2) * textRadius, 
                     250 + Math.sin(angle + arc / 2) * textRadius);
       ctx.rotate(angle + arc / 2 + Math.PI / 2);
       var text = options[i];
       ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+      ctx.strokeText(text, -ctx.measureText(text).width / 2, 0);
       ctx.restore();
     } 
 
@@ -108,6 +90,7 @@ function drawRouletteWheel() {
     ctx.lineTo(250 - 8, 250 - (outsideRadius - 10));
     ctx.lineTo(250 - 8, 250 - (outsideRadius + 10));
     ctx.fill();
+    ctx.stroke();
   }
 }
 
@@ -136,9 +119,9 @@ function stopRotateWheel() {
   var arcd = arc * 180 / Math.PI;
   var index = Math.floor((360 - degrees % 360) / arcd);
   ctx.save();
-  ctx.font = 'bold 30px Impact, Arial';
+  ctx.font = 'bold 30px Kanit, Sans Serif';
   var text = options[index]
-  ctx.fillStyle = "#dbdbdb";
+  ctx.fillStyle = "white";
   ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
   ctx.restore();
 }
