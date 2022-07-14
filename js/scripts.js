@@ -1,4 +1,4 @@
-var options = ["Rangoli","Sala Thai","69/420","Sketch Tacos","Carnival","BBQ","Burgers","Pho Street","Kimchi"];
+var options = ["Rangoli","Sala Thai","Street Food","Sketch Tacos","Carnival","BBQ","Burgers","Pho Street","Kimchi"];
 
 var startAngle = 0;
 var arc = Math.PI / (options.length / 2);
@@ -73,8 +73,16 @@ function drawRouletteWheel() {
                     250 + Math.sin(angle + arc / 2) * textRadius);
       ctx.rotate(angle + arc / 2 + Math.PI / 2);
       var text = options[i];
-      ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
-      ctx.strokeText(text, -ctx.measureText(text).width / 2, 0);
+      words = text.split(' ');
+      var height = 0;
+      if (words.length > 1){
+        height = -5*words.length
+      }
+      for (var j = 0; j < words.length; j++){
+        ctx.fillText(words[j], -ctx.measureText(words[j]).width / 2, height);
+        ctx.strokeText(words[j], -ctx.measureText(words[j]).width / 2, height);
+        height += 18;
+      }
       ctx.restore();
     } 
 
